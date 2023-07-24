@@ -66,3 +66,7 @@ def test_for(request):
     c1 = Context({'list':['python','java','js','c++']})
     html = t1.render(c1)
     return HttpResponse(html)
+
+def test_url(request):
+    return render(request,'test_url.html')
+
