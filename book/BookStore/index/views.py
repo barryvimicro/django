@@ -3,7 +3,7 @@
 # Create your views here.
 from django.template import loader
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 #def test_html(request):
     #t = loader.get_template('test.html')    #通过loader 加载test.html模板
@@ -11,6 +11,11 @@ from django.http import HttpResponse
     #return HttpResponse(html)               #用响应对象将html的内容返回给浏览器
 
 from django.shortcuts import render          #导入reder方法
+from django.urls import reverse
+from index import views
+from index.models import Book           #从index/models.py导入Book表
+
+
 def test(request):
     return render(request,'test.html',{'name':'c语言中文网'})    #根据字典数据生成动态模板
 
@@ -70,3 +75,22 @@ def test_for(request):
 def test_url(request):
     return render(request,'test_url.html')
 
+#定义父模板视图函数
+def base_html(request):
+    return render(request,'index/base.html')
+#d定义子模板视图函数
+def index_html(request):
+    name='xiaoming'
+    course=['python','django','flask']
+    return render(request,'index/test.html',locals())  #locals()函数以字典的方式返回当前位置的全部局部变量
+
+#反向解析页面跳转，通过模板
+def redict_url(request):
+    return render(request,'index/newtest.html')
+#函数直接重定向
+def test_to_reverse(request):
+    return HttpResponseRedirect(reverse('index:detail_hello'))
+
+def BookName(request):
+    books=Book.objects.raw("select * from index_book") #SQL语句
+    return render(request,"index/allbook.html",locals())

@@ -18,3 +18,6 @@ class Author(models.Model): #创建作者表
 class UserInfo(models.Model): #创建用户信息表
     username=models.CharField(max_length=24,verbose_name='用户注册')
     password =models.CharField(max_length=24,verbose_name='密码')
+
+class PubName(models.Model):   #创建出版社表
+    pubname=models.CharField("名称",max_length=255,unique=True)

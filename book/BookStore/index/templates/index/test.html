@@ -1,0 +1,22 @@
+{% extends 'index/base.html' %}
+<!--重写title-->
+{% block title %} 欢迎你学习Django教程 {% endblock title %}
+<!--区域1保持父模板-->
+<!--对父模板的区域2进行重写-->
+{% block content %}
+{% for item in course %}
+<li>{{ item }}</li>
+{% endfor %}
+{% endblock content %}
+<!--对父模板的区域3进行重写-->
+{% block footer %}
+<p>
+    最后希望<span style="color:red">{{ name }}</span>在C语言中文网学习可以学有所成
+</p>
+{% endblock footer %}
+<!--测试模板内容扩展-->
+{% block test %}
+{{block.super}}block.super实现父模板内容的添加
+{% endblock test %}
+
+
